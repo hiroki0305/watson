@@ -1,13 +1,15 @@
 import React from "react";
-import {Question} from "../index";
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+
+import Header from "../templates/Header";
+import {Test} from "../templates/Test"
+
 
 const QuestionsList = () =>{
     return(
         <Container maxWidth="md">
-            <Question />
+            <Header/>
+            <Test/>
         </Container>
     )
 }
