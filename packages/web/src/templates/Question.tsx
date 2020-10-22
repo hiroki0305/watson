@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import {get as _get, map as _map} from 'lodash'
+import {useGetQuestionListQuery} from "../types/graphql";
+
 const useStyles = makeStyles((theme) => ({
     icon: {
         marginRight: theme.spacing(2),
@@ -47,10 +50,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 const Question = () => {
     const classes = useStyles();
+    const {data} = useGetQuestionListQuery()
+    const questionEdges = _get(data, 'question', [])
 
     return (
         <React.Fragment>
@@ -59,15 +64,15 @@ const Question = () => {
                 <Container className={classes.cardGrid} maxWidth="md">
                     {/* End hero unit */}
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                            <Grid item key={card} xs={12} sm={12} md={12}>
+                        {_map(questionEdges, (row) => (
+                            <Grid item key={row.id} xs={12} sm={12} md={12}>
                                 <Card className={classes.card}>
                                     <CardContent className={classes.cardContent}>
                                         <Typography gutterBottom variant="h5" component="h2">
-                                            質問タイトルが入ります
+                                            {row.title}
                                         </Typography>
                                         <Typography>
-                                            ここには質問の概要が入ります。質問文の冒頭１００文字を表示とか？
+                                            {row.text}
                                         </Typography>
                                     </CardContent>
                                     <div>
