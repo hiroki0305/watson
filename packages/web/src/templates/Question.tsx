@@ -11,7 +11,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import {get as _get, map as _map} from 'lodash'
-import {useGetQuestionListQuery} from "../types/graphql";
+import {useGetUserListQuery} from "../types/graphql";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Question = () => {
     const classes = useStyles();
-    const {data} = useGetQuestionListQuery()
+    const {data} = useGetUserListQuery()
     const questionEdges = _get(data, 'question', [])
 
     return (
