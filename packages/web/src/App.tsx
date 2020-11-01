@@ -1,7 +1,8 @@
 import React from "react";
+import Router from './routes'
 
-import QuestionsList from "./pages/QuestionsList";
 import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
+import {Box} from "@material-ui/core";
 
 export const App: React.FC = () => {
     const client = new ApolloClient({
@@ -10,7 +11,9 @@ export const App: React.FC = () => {
     })
     return (
         <ApolloProvider client={client}>
-            <QuestionsList/>
+            <Box p={2}>
+                <Router/>
+            </Box>
         </ApolloProvider>
     )
 }
