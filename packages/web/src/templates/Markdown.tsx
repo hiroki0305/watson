@@ -1,5 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
+
+import {useStateWithStorage} from "../hooks/use_state_with_storage";
 
 const Header = styled.header`
   font-size: 1.5rem;
@@ -42,9 +44,10 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
+const StorageKey = 'pages/Markdown:content'
 
 export const Markdown: React.FC = () => {
-    const [content, setContent] = useState<string>('')
+    const [content, setContent] = useStateWithStorage('質問を入力してください', StorageKey)
     return (
         <>
             <Header>
