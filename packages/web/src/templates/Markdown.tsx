@@ -1,25 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 import {useStateWithStorage} from "../hooks/use_state_with_storage";
-
-const Header = styled.header`
-  font-size: 1.5rem;
-  height: 2rem;
-  left: 0;
-  line-height: 2rem;
-  padding: 0.5rem 1rem;
-  position: fixed;
-  right: 0;
-  top: 0;
-`
+import ReactMarkdown from "react-markdown";
+import {putMemo} from "../models/indexeddb/memos";
+import {AppContainedButtons} from "../components/button";
+import {SaveModal} from "./modal/SaveModal";
+import {Link} from "react-router-dom";
+import {HeaderMde} from "./HeaderMde";
 
 const Wrapper = styled.div`
   bottom: 0;
   left: 0;
   position: fixed;
   right: 0;
-  top: 3rem;
+  top:3rem
 `
 
 const TextArea = styled.textarea`
@@ -44,15 +39,31 @@ const Preview = styled.div`
   top: 0;
   width: 50vw;
 `
+const HeaderArea = styled.div`
+  position: fixed;
+  right: 0;
+  top: 0;
+  left: 0;
+  `
+
 const StorageKey = 'pages/Markdown:content'
 
 export const Markdown: React.FC = () => {
     const [content, setContent] = useStateWithStorage('質問を入力してください', StorageKey)
+    const [showModal, setShowModal] = useState(false)
+
     return (
         <>
-            <Header>
-                Markdown Editor
-            </Header>
+            <HeaderArea>
+                <HeaderMde title={"Markdown Editor"}>
+                    <AppContainedButtons onClick={() => setShowModal(true)} mode={"create"}>
+                        保存する
+                    </AppContainedButtons>
+                    <Link to="/history">
+                        履歴を見る
+                    </Link>
+                </HeaderMde>
+            </HeaderArea>
             <Wrapper>
                 <TextArea
                     onChange={(event) => {
@@ -60,8 +71,19 @@ export const Markdown: React.FC = () => {
                     }}
                     value={content}
                 />
-                <Preview>プレビューエリア</Preview>
+                <Preview>
+                    <ReactMarkdown source={content}/>
+                </Preview>
             </Wrapper>
+            {showModal && (
+                <SaveModal
+                    onSave={(title: string): void => {
+                        putMemo(title, content)
+                        setShowModal(false)
+                    }}
+                    onCancel={() => setShowModal(false)}
+                />
+            )}
         </>
     )
 }

@@ -2,9 +2,14 @@
   "compilerOptions": {
     "target": "es5",
     "module": "ESNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext",
+      "es2015"
+    ],
     "allowJs": true,
-    "jsx": "preserve",
+    "jsx": "react",
     "outDir": "dist",
     "strict": true,
     "noUnusedLocals": true,
