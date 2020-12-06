@@ -1,0 +1,18 @@
+query getUserList{
+    user{
+        id
+        name
+    }
+}
+
+mutation createUser($name: String!) {
+    insert_user(objects: {name:$name}){
+        affected_rows
+    }
+}
+
+mutation createQuestion($title: String!,$content: String!){
+    insert_question(objects: {title:$title,content:$content}){
+        affected_rows
+    }
+}

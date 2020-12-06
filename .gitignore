@@ -20,3 +20,5 @@ yarn-error.log*
 packages/web/node_modules
 /packages_disable/web/node_modules/
 /.idea/
+/packages/web/package-lock.json
+/package-lock.json
