@@ -17,8 +17,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /Memo/
-packages/web/node_modules
+packages/web_react/node_modules
 /packages_disable/web/node_modules/
 /.idea/
-/packages/web/package-lock.json
+/packages/web_react/package-lock.json
 /package-lock.json

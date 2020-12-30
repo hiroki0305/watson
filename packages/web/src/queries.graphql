@@ -5,6 +5,14 @@ query getUserList{
     }
 }
 
+query getQuestionList{
+    question{
+        id
+        title
+        content
+    }
+}
+
 mutation createUser($name: String!) {
     insert_user(objects: {name:$name}){
         affected_rows
